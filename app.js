@@ -15,7 +15,7 @@ const app = express();
 app.use(
     cors({
         credentials: true,
-        origin: 'https://twitter-niket.netlify.app/',
+        origin: 'https://twitter-niket.netlify.app',
     })
 );
 const limiter = rateLimit({
