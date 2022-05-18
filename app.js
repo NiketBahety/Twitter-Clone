@@ -6,10 +6,16 @@ const userRouter = require('./routes/userRoutes');
 const tweetRouter = require('./routes/tweetRoutes');
 
 const app = express();
+// app.use(
+//     cors({
+//         credentials: true,
+//         origin: 'http://localhost:3000',
+//     })
+// );
 app.use(
     cors({
         credentials: true,
-        origin: 'http://localhost:3000',
+        origin: 'https://twitter-niket.netlify.app/',
     })
 );
 const limiter = rateLimit({
