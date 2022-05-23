@@ -9,18 +9,18 @@ const app = express();
 
 app.use('/uploads', express.static('uploads'));
 
-app.use(
-    cors({
-        credentials: true,
-        origin: 'http://localhost:3000',
-    })
-);
 // app.use(
 //     cors({
 //         credentials: true,
-//         origin: 'https://twitter-niket.netlify.app',
+//         origin: 'http://localhost:3000',
 //     })
 // );
+app.use(
+    cors({
+        credentials: true,
+        origin: 'https://twitter-niket.netlify.app',
+    })
+);
 const limiter = rateLimit({
     max: 10000, // No of requests allowed from a single IP in one window
     windowMs: 15 * 60 * 1000, // One window 15 minutes
