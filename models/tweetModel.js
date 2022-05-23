@@ -5,6 +5,9 @@ const tweetSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Tweet cannot be empty !!'],
     },
+    image: {
+        type: String,
+    },
     postedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

@@ -18,9 +18,11 @@ exports.getAllTweets = catchAsync(async (req, res, next) => {
 });
 
 exports.postTweet = catchAsync(async (req, res, next) => {
+    console.log(req.file);
     const tweet = await Tweet.create({
         postedBy: req.user,
         tweet: req.body.tweet,
+        image: req.file?.path,
     });
     const user = req.user._id;
     const postedUser = await User.findById(user);
