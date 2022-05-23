@@ -1,7 +1,8 @@
-const { populate } = require('../models/tweetModel');
 const Tweet = require('../models/tweetModel');
 const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
+
+const { cloudinary } = require('../utils/cloudinary');
 
 exports.getAllTweets = catchAsync(async (req, res, next) => {
     const tweets = await Tweet.find()
@@ -19,11 +20,19 @@ exports.getAllTweets = catchAsync(async (req, res, next) => {
 
 exports.postTweet = catchAsync(async (req, res, next) => {
     console.log(req.file);
+    let cloudinaryResponse;
+    if (req.file) {
+        cloudinaryResponse = await cloudinary.uploader.upload(req.file.path, {
+            upload_preset: 'dev_setups',
+        });
+    }
+
     const tweet = await Tweet.create({
         postedBy: req.user,
         tweet: req.body.tweet,
-        image: req.file?.path,
+        image: cloudinaryResponse?.url,
     });
+
     const user = req.user._id;
     const postedUser = await User.findById(user);
     postedUser.tweets.push(tweet._id);
